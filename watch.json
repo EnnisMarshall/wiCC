@@ -1,0 +1,19 @@
+{
+  "install": {
+    "include": [
+      "^package\\.json$",
+      "^\\.env$",
+      "^\\.env.development",
+      "^gatsby-node.js$"      
+    ]
+  },
+  "restart": {
+    "exclude": [
+      "^src/",
+      "^public/",
+      "^.cache/",
+      "^README.md$"
+    ]
+  },
+  "throttle": 100
+}
