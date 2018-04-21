@@ -17,7 +17,7 @@
     "react-scripts": "0.9.5",
     "rc-slider": "^8.6.1",
     "react-radio-group": "^3.0.2",
-    "react-toggle-button":"^2.2.0"
+    "react-toggle":"^4.0.2"
 
   },
   "engines": {

@@ -5,7 +5,8 @@ import './App.css';
 import RadioButtons from "./components/RadioButtons"
 import Button from "./components/Button"
 import PhotonSlider from "./components/Slider"
-import Toggle from "./components/ToggleButton"
+import Toggle from "react-toggle"
+import "react-toggle/style.css"
 // class Button extends React.Component {
 
 
@@ -20,24 +21,34 @@ let buttons = [
       {label:"Reverse", value: "reverse"}
     ];
 
-let group1Bits = {
-    F1: 1,
+let functionBits = {
+    F1: 1, //these are the bits to set for each function in a function group
     F2: 2,
     F3: 4,
     F4: 8,
-    F0: 16
+    F0: 16,
+    F5: 1,
+    F6: 2
 }
 
-
+const groupOp = {
+    group1: 7,
+    group2: 8,
+    group3: 9
+  }
     
 class App extends Component {
+  
+  
+ 
+  
   constructor(props) {
     super(props);
     this.state = {
       onPressed: "ready",
       offPresssed: "ready",
       direction: "fwd",
-      group1: 0,
+      group1: 0, // group1 is bits indicating what is active in function group 1
       group2: 0,
       group3: 0
   };
@@ -74,6 +85,23 @@ class App extends Component {
       })
   }
   
+  triggerFunction(group, bits, on){ 
+    var o = {}  //empty javascript object
+    
+    if (on)
+      o[group] = this.state[group] | bits  //o["group1"] is the same as o.group1
+    else
+      o[group] = this.state[group] & ~bits
+    
+    console.log("o=",o)
+    
+    this.setState({onPressed:"sending"})
+    this.sendDcc(groupOp[group], o[group])
+    this.setState(o)
+    console.log(`Sending group=${group} bits ${o[group]}`)
+  }
+    
+
   render() {
     let handleChange = (value) => {
       console.log("Change value to " + value )
@@ -81,47 +109,52 @@ class App extends Component {
     }
     console.log("Constructed state Group1: "+this.state.group1)
     return <div>
-              
-                <Button content="Headlight (F0) ON" onClick={() => {
-                    this.setState({onPressed:"sending"});
-                    this.setState({group1: this.state.group1 | group1Bits.F0})
-                    this.sendDcc("7", this.state.group1.toString())
-                    console.log("Sending Group1 on State:"+this.state.group1)}
-                    } 
-                    variant={this.getColor(this.state.onPressed)} />
-              
-                <Button content="Headlight (F0) OFF" onClick={() => {
-                    this.setState({onPressed:"sending"});
-                    this.setState({group1: this.state.group1 & ~group1Bits.F0})
-                    this.sendDcc("7", this.state.group1.toString())
-                    console.log("Sending Group1 off State:"+this.state.group1)}
-                    } 
-                    variant={this.getColor(this.state.onPressed)} />
-              
-                <Button content="F1 ON" onClick={() => {
-                    this.setState({onPressed:"sending"});
-                    this.setState({group1: this.state.group1 | group1Bits.F1})
-                    this.sendDcc("7", this.state.group1.toString())
-                    console.log("Sending Group1 on State:"+this.state.group1)}
-                    } 
-                    variant={this.getColor(this.state.onPressed)} />
-              
-                <Button content="F1 OFF" onClick={() => {
-                    this.setState({onPressed:"sending"});
-                    this.setState({group1: this.state.group1 & ~group1Bits.F1})
-                    this.sendDcc("7", this.state.group1.toString())
-                    console.log("Sending Group1 off State:"+this.state.group1)}
-                    } 
-                    variant={this.getColor(this.state.onPressed)} />
-              
-                <Button content="FWD 0" onClick={() => {
-                    this.setState({onPressed:"sending"});this.sendDcc("fwd128", "0")}
-                    } 
-                    variant={this.getColor(this.state.onPressed)} />
-              <Button content="REV 0" onClick={() => {
-                    this.setState({onPressed:"sending"});this.sendDcc("rev128", "0")}
-                    } 
-                    variant={this.getColor(this.state.onPressed)} />
+        <table>
+          <tr>
+            <td>
+              <span class="toggle">  
+                <p class="label">Headlight</p>
+                <Toggle
+                    defaultChecked={this.state.group1 & ~functionBits.F0}
+                    onChange={(e)=>{
+                              this.triggerFunction('group1',functionBits.F0,e.target.checked)
+                              console.log("onChagne",e.target.checked)
+                             }
+                    }
+                />
+              </span>
+            </td>
+
+            <td>
+              <span class="toggle">  
+                <p class="label">Bell</p>
+                <Toggle
+                    defaultChecked={this.state.group1 & ~functionBits.F1}
+                    onChange={(e)=>{
+                              this.triggerFunction('group1',functionBits.F1,e.target.checked)
+                              console.log("onChagne",e.target.checked)
+                             }
+                    }
+                />
+              </span>
+            </td>
+
+            <td>
+              <span class="toggle">  
+                <p class="label">Function 3</p>
+                <Toggle
+                    defaultChecked={this.state.group1 & ~functionBits.F3}
+                    onChange={(e)=>{
+                              this.triggerFunction('group1',functionBits.F3,e.target.checked)
+                              console.log("onChagne",e.target.checked)
+                             }
+                    }
+                />
+              </span>
+            </td>
+          </tr>
+        </table>
+
 
               <RadioButtons
                   buttons={buttons}
@@ -139,21 +172,12 @@ class App extends Component {
                       console.log("Reverse 128: "+val)
                     }}} />
 
-              
-                <Toggle
-                  onToggle={(value) => {
-                    if(value){
-                            this.setState({group1: this.state.group1 | group1Bits.F1})
-                    } else {
-                            this.setState({group1: this.state.group1 & ~group1Bits.F1})
-                    }
-                     console.log(this.state.group1)
-                  }} />
-
-
+        
+                
         </div>
   }    
 
 }
 
 export default App;
+

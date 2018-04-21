@@ -3,7 +3,7 @@ import {RadioGroup, Radio} from 'react-radio-group'
 
 const localstyle = {
   group: {
-    background: "white",
+    background: "rgba(0,0,0,0)",
     color: "black",
     width: "400px",
     marginLeft: "10%",
