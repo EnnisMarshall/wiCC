@@ -56,3 +56,12 @@ td {
   padding:10pt;
   
 }
+
+.stopBtn {
+  background: rgba(0,0,0,0);
+  color:black;
+  border:solid black 2pt;
+  display: inline;
+  background-image: url('https://cdn.glitch.com/c08da29c-32b5-48d3-91bd-317f5d96c9f1%2Fstop-1327126_960_720.png?1524343726930');
+  background-repeat: no-repeat;
+}

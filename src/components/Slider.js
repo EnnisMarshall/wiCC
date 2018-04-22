@@ -7,7 +7,7 @@ import Tooltip from 'rc-tooltip';
 // import Range from 'rc-slider/lib/Range';
 import 'rc-slider/assets/index.css';
 import 'rc-tooltip/assets/bootstrap.css';
-const style = {float: 'left', width: 200, height: 400, marginBottom: 160, marginLeft: 50};
+const style = {float: 'left', width: 200, height: 300, marginBottom: 160, marginLeft: 50};
 //const parentStyle = {overflow: 'hidden'};
 const Handle = Slider.Handle;
 
