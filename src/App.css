@@ -24,16 +24,12 @@
 }
 
 .toggle {
-  border:2pt solid black;
   margin:3pt;
   padding:3pt;
-  position:relative;
-  display:inline-flex;
-  
 }
 
 .label {
-  color:lightblue;
+  color:black;
   text-align:center;
   
 }

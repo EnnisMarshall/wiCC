@@ -18,7 +18,10 @@
     "rc-slider": "^8.6.1",
     "react-radio-group": "^3.0.2",
     "react-toggle":"^4.0.2",
-    "react-textfield":"^0.0.6"
+    "react-textfield":"^0.0.6",
+    "react-player": "^1.4.0"
+
+
 
   },
   "engines": {
