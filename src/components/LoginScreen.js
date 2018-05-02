@@ -4,6 +4,7 @@ console.log("Particle is", window.Particle)
 var particle = new window.Particle();  
 
 import ClickButton from "./ClickButton"
+import PictureButton from "./PictureButton"
 
 class LoginScreen extends React.Component{
   constructor(props){
@@ -19,15 +20,15 @@ class LoginScreen extends React.Component{
    var password = document.getElementById("password").value
    var app = this.props.app
    var me = this
-   var loginURL = `api.particle.io/v1/devices/`
    
    this.setState({loginError: false})
     
    particle.login({ username: username, password: password }).then(
       (data) => {
         console.log('login() data=', data.body);
-        app.setState({ loggedIn:true});
         app.setState({access:data.body.access_token});
+        app.setState({ loggedIn:true});
+        
         
         console.log('Login successful! myAccessToken=', app.state.access);
       },
@@ -43,10 +44,21 @@ class LoginScreen extends React.Component{
   render () {
   	console.log("loginScreen::render()")
     
-  	return <div>
-    	User:<input id="username" type="text" name="username"></input><br/>
-      Password:<input id="password" type="password" name="password"></input>
-      <ClickButton class="loginBtn" name="Login" fn={this.handleLogin.bind(this)}/>
+  	return <div className="loginScreen">
+      <table>
+        <tbody>
+          <tr>
+            <td>User:</td><td><input id="username" type="text" name="user"></input><br/></td>
+          </tr>
+          <tr>
+            <td>Password:</td><td><input id="password" type="password" name="pass"></input></td>
+          </tr>
+          <tr >
+            <td colSpan="2"><PictureButton class="loginBtn"  fn={this.handleLogin.bind(this)}/></td>
+          </tr>
+        </tbody>
+      </table>
+
       
      {this.state.loginError ?  <p>Login Error</p> : <p/>}
   	</div>

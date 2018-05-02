@@ -1,3 +1,10 @@
+* {
+  font-family: 'Helvetica';
+  font-weight: 300;
+  box-sizing:border-box;
+  border: solid green 1pt;
+}
+
 body {
   display: flex;
   flex-direction: column;
@@ -7,11 +14,6 @@ body {
   background: rgba(200,200,200,1.0);
 }
 
-* {
-   font-family: 'Helvetica';
-  font-weight: 300;
-  box-sizing:border-box;
-}
 
 
 h1 {
@@ -22,7 +24,7 @@ h1 {
 }
 
 button, .radio {
- margin: 30px;
+ margin: 10px;
  font-size: 18px;
  height: 50px;
  width: 100px;
@@ -56,3 +58,22 @@ td {
   padding:10pt;
   
 }
+
+.loginBtn { 
+  height: 25pt;
+  width: 25pt;  
+  content: url(https://cdn.glitch.com/c08da29c-32b5-48d3-91bd-317f5d96c9f1%2Ficons8-enter-50.png?1524783283084);
+}
+
+.logOutBtn {
+  height: 25pt;
+  width: 25pt;
+  display: block;
+  margin: auto;
+  content: url(https://cdn.glitch.com/c08da29c-32b5-48d3-91bd-317f5d96c9f1%2Ficons8-exit-filled-50.png?1524783283270);
+}
+
+
+
+
+

@@ -48,8 +48,7 @@ class ControlPanel extends React.Component {
       group1: 0, // group1 is bits indicating what is active in function group 1
       group2: 0,
       group3: 0,
-      fn: this.eStop,
-      layout: "2d0028000b47353235303037"
+      fn: this.eStop
     }
   }
   
@@ -57,42 +56,26 @@ class ControlPanel extends React.Component {
      
   sendDcc(operation, command) {
     console.log("sendDcc()")
-    return this.sendWithArgs1("dcc",operation, command)
+    return this.sendWithArgs("dcc",operation, command)
   }
   
-  sendWithArgs(type, operation, command) {
-    var engine = document.getElementById("engine").value
-    
-    console.log("sent to loco ="+engine);
-    const access = this.props.app.state.access
-    fetch(`https://api.particle.io/v1/devices/2d0028000b47353235303037/${type}Command`, {
-            body: `arg=${engine},${operation},${command}&access_token=${access}`,
-            headers: {
-              "Content-Type": "application/x-www-form-urlencoded"
-            },
-            method: "POST"
-          }).then((myJson) => {
-      console.log("Success")
-      console.log(myJson);
-      window.myJson = myJson
-      if(!myJson.ok) {throw new Error("not OK")}
-      this.setState({[command + "Pressed"]:"ready"})
-    }).catch(error => {console.error(error)
-    this.setState({[command + "Pressed"]:"error"})
-      })
-  }
+
   
-    sendWithArgs1(type, operation, command) {
+    sendWithArgs(type, operation, command) {
     var engine = document.getElementById("engine").value
+    console.log("ControlPanel.sendWithArgs() deviceId=", this.props.layout)
+    console.log("ControlPanel.sendWithArgs() accessToken=", this.props.access)
+
+ 
     
     console.log("sent to loco ="+engine);
-    particle.callFunction({ deviceId: this.state.layout, name: `${type}Command`, argument: `${engine},${operation},${command}`, auth: this.props.access })
+    particle.callFunction({ deviceId: this.props.layout, name: `${type}Command`, argument: `${engine},${operation},${command}`, auth: this.props.access })
       .then((data) => {
       console.log("Success")
       console.log(data);
     },
      (error)=>{
-      console.log("ControlPanel.sendWithArgs1() error =",error)
+      console.log("ControlPanel.sendWithArgs() error =",error)
       }
     )
   }
@@ -158,6 +141,11 @@ class ControlPanel extends React.Component {
   triggerHorn(on) {
    this.triggerFunction('group1',functionBits.F2,on)
   }
+  
+  exitLayout() {
+  	this.props.exit()
+ 
+  }
 
       
   render() {
@@ -175,12 +163,10 @@ class ControlPanel extends React.Component {
       }
     }
     
-    console.log("Constructed state Group1: "+this.state.group1)
-    console.log("Constructed state Group2: "+this.state.group2)
-    console.log("Constructed state Group3: "+this.state.group3)
     
     return <div>
               <div>
+                <ClickButton name="Exit RR" fn={this.exitLayout.bind(this)} params=""/>
                 Engine #:<input id="engine" type="address" name="address"></input>
               </div>
               <table>

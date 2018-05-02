@@ -10,8 +10,10 @@ class ClickButton extends React.Component {
   }
 
   handleClick() {
-    console.log("ClickButton.handleClick()")
-    this.props.fn()
+    	if (this.props.params)
+  		this.props.fn(this.props.params)
+    else 
+    	this.props.fn()
   }
 
   render() {
