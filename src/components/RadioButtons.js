@@ -5,7 +5,7 @@ const localstyle = {
   group: {
     background: "rgba(0,0,0,0)",
     color: "black",
-    width: "400px",
+    width: "100px",
     marginLeft: "10%",
     marginRight: "10%"
   }

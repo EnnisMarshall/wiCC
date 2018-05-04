@@ -46,16 +46,39 @@ class SelectLayout extends React.Component {
 	render () {
     return <div className="selectLayout">
       <ol>
-            <PictureButton class="logOutBtn" fn={this.logOut.bind(this)} params=""/>
+          <PictureButton class="logOutBtn" fn={this.logOut.bind(this)} params=""/>
 
-
-        {this.state.layouts.map(layout => <li key={layout.id}>
-          <ClickButton name={layout.name} fn={this.controlLayout.bind(this)} params={layout.id}/>
-        </li>)} 
+          {this.state.layouts.map(layout => this.listItem(layout))}
+       
       </ol>
 
       </div>
+  }  
+  
+  listItem(layout) {
+    var layoutConfig = {}
+           
+    try {
+      layoutConfig = JSON.parse(layout.notes)
+      {console.log("layoutConfig",layoutConfig)}
+      
+       if (layoutConfig.layout) {
+        return  <li key={layout.id}>
+           <ClickButton name={layout.name} fn={this.controlLayout.bind(this)} params={layout.id}/>
+        </li>
+      } else 
+        return ""
+    }
+    catch (err){
+      // error here is OK just bad JSON parse
+    }  
   }
+              
+              
+              
 }
+     
+              
+              
 
 export default SelectLayout

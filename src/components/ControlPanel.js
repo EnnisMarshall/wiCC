@@ -6,6 +6,7 @@ import PictureButton from "./PictureButton"
 import PhotonSlider from "./Slider"
 import Toggle from "react-toggle"
 import "react-toggle/style.css"
+import Player from "./Player"
 
 console.log("Particle is", window.Particle)
 var particle = new window.Particle();  
@@ -48,8 +49,35 @@ class ControlPanel extends React.Component {
       group1: 0, // group1 is bits indicating what is active in function group 1
       group2: 0,
       group3: 0,
-      fn: this.eStop
+      fn: this.eStop,
+      player: false,
+      layoutConfig: {}
     }
+    
+    var layout = this.props.layout
+    var access = this.props.access
+    console.log("ControlPanel.constructor() access=", access)
+    console.log("ControlPanel.constructor() layout=", layout)
+
+    var me = this
+      
+    particle.getDevice({ deviceId: layout, auth: access }).then(
+      function(device){
+        
+        try {
+          var layoutConfig = JSON.parse(device.body.notes)
+          console.log('ControlPanel.constructor() layoutConfig=', layoutConfig);
+          this.setState({layoutConfig:layoutConfig}) 
+        }
+        catch (err) { // error here just means theres no config for this layout
+        }
+      },
+      function(err) {
+        console.log('ControlPanel() err= ', err);
+      }
+    )
+
+
   }
   
   
@@ -166,33 +194,46 @@ class ControlPanel extends React.Component {
     
     return <div>
               <div>
-                <ClickButton name="Exit RR" fn={this.exitLayout.bind(this)} params=""/>
-                Engine #:<input id="engine" type="address" name="address"></input>
+              <table>
+                <tbody>
+                  <tr>
+                    <td>
+                      <ClickButton name="Exit RR" fn={this.exitLayout.bind(this)} params=""/>
+                    </td>
+                    <td>
+                      Engine #:<input id="engine" type="address" name="address"></input>
+                    </td>
+                    <td>
+                      <span className="toggle">  
+                              <p class="label">Headlight (F0)</p>
+                              <Toggle
+                                  defaultChecked={(this.state.group1 & ~functionBits.F0) !== 0}
+                                  onChange={(e)=>{
+                                            this.triggerFunction('group1',functionBits.F0,e.target.checked)
+                                            console.log("onChagne",e.target.checked)
+                                           }
+                                  }
+                              />
+                      </span>
+                    </td>
+                    <td>             
+                      <MomentaryButton class="" name="Horn" fn={this.triggerHorn.bind(this)}/> 
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+
               </div>
+          <table>
+            <tbody>
+              <tr>
+               <td>
               <table>
                 <tbody>
                   <tr>
                     <td>
                       <span className="toggle">  
-                        <p className="label">Headlight (F0)</p>
-                        <Toggle
-                            defaultChecked={(this.state.group1 & ~functionBits.F0) !== 0}
-                            onChange={(e)=>{
-                                      this.triggerFunction('group1',functionBits.F0,e.target.checked)
-                                      console.log("onChagne",e.target.checked)
-                                     }
-                            }
-                        />
-                      </span>
-                    </td>
-                    <td>
-                         <MomentaryButton class="" name="Horn" fn={this.triggerHorn.bind(this)}/> 
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <span className="toggle">  
-                        <p className="label">Bell (F1)</p>
+                        <p class="label">Bell (F1)</p>
                         <Toggle
                             defaultChecked={(this.state.group1 & ~functionBits.F1) !== 0}
                             onChange={(e)=>{
@@ -206,7 +247,7 @@ class ControlPanel extends React.Component {
 
                     <td>
                       <span className="toggle">  
-                        <p className="label">F2</p>
+                        <p class="label">F2</p>
                         <Toggle
                             defaultChecked={(this.state.group1 & ~functionBits.F2) !== 0}
                             onChange={(e)=>{
@@ -220,7 +261,7 @@ class ControlPanel extends React.Component {
 
                     <td>
                       <span className="toggle">  
-                        <p className="label">F3</p>
+                        <p class="label">F3</p>
                         <Toggle
                             defaultChecked={(this.state.group1 & ~functionBits.F3) !== 0}
                             onChange={(e)=>{
@@ -234,7 +275,7 @@ class ControlPanel extends React.Component {
 
                     <td>
                       <span className="toggle">  
-                        <p className="label">F4</p>
+                        <p class="label">F4</p>
                         <Toggle
                             defaultChecked={(this.state.group1 & ~functionBits.F4) !== 0}
                             onChange={(e)=>{
@@ -245,10 +286,11 @@ class ControlPanel extends React.Component {
                         />
                       </span>
                     </td>
-
+                  </tr>
+                  <tr>
                     <td>
                       <span className="toggle">  
-                        <p className="label">F5</p>
+                        <p class="label">F5</p>
                         <Toggle
                             defaultChecked={(this.state.group2 & ~functionBits.F5) !== 0}
                             onChange={(e)=>{
@@ -262,7 +304,7 @@ class ControlPanel extends React.Component {
 
                     <td>
                       <span className="toggle">  
-                        <p className="label">F6</p>
+                        <p class="label">F6</p>
                         <Toggle
                             defaultChecked={(this.state.group2 & ~functionBits.F6) !== 0}
                             onChange={(e)=>{
@@ -273,11 +315,10 @@ class ControlPanel extends React.Component {
                         />
                       </span>
                     </td>
-                  </tr>
-                  <tr>
-                      <td>
+                  
+                    <td>
                       <span className="toggle">  
-                        <p className="label">F7</p>
+                        <p class="label">F7</p>
                         <Toggle
                             defaultChecked={(this.state.group2 & ~functionBits.F7) !== 0}
                             onChange={(e)=>{
@@ -291,7 +332,7 @@ class ControlPanel extends React.Component {
 
                     <td>
                       <span className="toggle">  
-                        <p className="label">F8</p>
+                        <p class="label">F8</p>
                         <Toggle
                             defaultChecked={(this.state.group2 & ~functionBits.F8) !== 0}
                             onChange={(e)=>{
@@ -302,10 +343,11 @@ class ControlPanel extends React.Component {
                         />
                       </span>
                     </td>
-
+                  </tr>
+                  <tr>
                     <td>
                       <span className="toggle">  
-                        <p className="label">F9</p>
+                        <p class="label">F9</p>
                         <Toggle
                             defaultChecked={(this.state.group3 & ~functionBits.F9) !== 0}
                             onChange={(e)=>{
@@ -319,7 +361,7 @@ class ControlPanel extends React.Component {
 
                     <td>
                       <span className="toggle">  
-                        <p className="label">F10</p>
+                        <p class="label">F10</p>
                         <Toggle
                             defaultChecked={(this.state.group3 & ~functionBits.F10) !== 0}
                             onChange={(e)=>{
@@ -333,7 +375,7 @@ class ControlPanel extends React.Component {
 
                     <td>
                       <span className="toggle">  
-                        <p className="label">F11</p>
+                        <p class="label">F11</p>
                         <Toggle
                             defaultChecked={(this.state.group3 & ~functionBits.F11) !== 0}
                             onChange={(e)=>{
@@ -347,7 +389,7 @@ class ControlPanel extends React.Component {
 
                     <td>
                       <span className="toggle">  
-                        <p className="label">F12</p>
+                        <p class="label">F12</p>
                         <Toggle
                             defaultChecked={(this.state.group3 & ~functionBits.F12) !== 0}
                             onChange={(e)=>{
@@ -361,31 +403,56 @@ class ControlPanel extends React.Component {
                   </tr>
                   </tbody>
                 </table>
-
-
-              <RadioButtons
-                  buttons={this.state.buttons}
-                  selectedValue={this.state.direction}
-                  onChange={handleChange}
-              />
-
-              <PhotonSlider max={126} onAfterChange={(val) => {
-                    console.log("PhotonSlider::onAfterChange() value=",val)
-                    this.setState({speed: val.toString()})
-                    if (this.state.direction==="fwd") {
-                      this.sendDcc("4", val.toString())
-                      console.log("Forward 128: "+val) 
-                    }else{   
-                      this.sendDcc("3", val.toString())
-                      console.log("Reverse 128: "+val)
-                    }}} />
-        
-          <ClickButton class="" name="All Stop" fn={this.eStop.bind(this)}/>
-
-          <ClickButton class="" name="Faster" fn={this.faster.bind(this)}/>
-
-          <ClickButton class="" name="Slower" fn={this.slower.bind(this)}/>
+              </td>
+              <td>
+                   <PhotonSlider max={126} onAfterChange={(val) => {
+                      console.log("PhotonSlider::onAfterChange() value=",val)
+                      this.setState({speed: val.toString()})
+                      if (this.state.direction==="fwd") {
+                        this.sendDcc("4", val.toString())
+                        console.log("Forward 128: "+val) 
+                      }else{   
+                        this.sendDcc("3", val.toString())
+                        console.log("Reverse 128: "+val)
+                      }}} 
+                    />
+              </td>
+              <td>
+                <table>
+                  <tbody>
+                    <tr>
+                      <td>
+                        <RadioButtons
+                            buttons={this.state.buttons}
+                            selectedValue={this.state.direction}
+                            onChange={handleChange}
+                        />
+                      </td>
+                    </tr>
+                    <tr>
+                     <td>
+                        <PictureButton class="stopBtn" fn={this.eStop.bind(this)}/>
+                     </td>
+                    </tr>
+                    <tr>
+                     <td>
+                        <ClickButton class="" name="Faster" fn={this.faster.bind(this)}/>
+                     </td>
+                    </tr>
+                    <tr>
+                     <td>
+                        <ClickButton class="" name="Slower" fn={this.slower.bind(this)}/>
+                     </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+          
             {this.state.speed}
+          {this.state.layoutConfig.cam ? <Player url={this.state.layoutConfig.url} /> : ""}
         </div>
   }
 }

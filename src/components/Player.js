@@ -3,7 +3,7 @@ import ReactPlayer from 'react-player'
  
 class Player extends Component {
   render () {
-    return <ReactPlayer url='https://youtu.be/q8wLrcWAVQo' playing />
+    return <ReactPlayer url={this.props.url} playing/>
   }
 }
 

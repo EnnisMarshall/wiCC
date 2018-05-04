@@ -2,7 +2,7 @@
   font-family: 'Helvetica';
   font-weight: 300;
   box-sizing:border-box;
-  border: solid green 1pt;
+  #border: solid green 1pt;
 }
 
 body {
@@ -27,7 +27,6 @@ button, .radio {
  margin: 10px;
  font-size: 18px;
  height: 50px;
- width: 100px;
  border-radius: 10px;
  border: none;
  box-shadow: 1px 1px 0px 2px rgba(0,0,0,0.3);
@@ -70,7 +69,17 @@ td {
   width: 25pt;
   display: block;
   margin: auto;
-  content: url(https://cdn.glitch.com/c08da29c-32b5-48d3-91bd-317f5d96c9f1%2Ficons8-exit-filled-50.png?1524783283270);
+  content: url(https://cdn.glitch.com/c08da29c-32b5-48d3-91bd-317f5d96c9f1%2Ficons8-exit-filled-50.png?1525266182730);
+}
+
+.stopBtn {
+  height: 50pt;
+  width: 50pt;
+  content: url(https://cdn.glitch.com/c08da29c-32b5-48d3-91bd-317f5d96c9f1%2Fstop-1327126_960_720.png?1524343726930);
+}
+
+.label {
+  text-align: center;
 }
 
 
