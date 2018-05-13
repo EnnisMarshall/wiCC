@@ -1,13 +1,13 @@
 * {
   font-family: 'Helvetica';
-  font-weight: 300;
-  box-sizing:border-box;
-  #border: solid green 1pt;
+  //font-weight: lighter;
+  box-sizing: border-box;
+  //border: solid green 1pt;
 }
 
 body {
-  display: flex;
-  flex-direction: column;
+  //display: flex;
+  //flex-direction: column;
   justify-content: center;
   align-items: center;
   height: 100vh;
@@ -76,10 +76,6 @@ td {
   height: 50pt;
   width: 50pt;
   content: url(https://cdn.glitch.com/c08da29c-32b5-48d3-91bd-317f5d96c9f1%2Fstop-1327126_960_720.png?1524343726930);
-}
-
-.label {
-  text-align: center;
 }
 
 

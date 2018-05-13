@@ -45,14 +45,23 @@ class SelectLayout extends React.Component {
   
 	render () {
     return <div className="selectLayout">
-      <ol>
-          <PictureButton class="logOutBtn" fn={this.logOut.bind(this)} params=""/>
-
-          {this.state.layouts.map(layout => this.listItem(layout))}
-       
-      </ol>
-
-      </div>
+            <table>
+              <tbody>
+                <tr>
+                  <td>
+                    <PictureButton class="logOutBtn" fn={this.logOut.bind(this)} params=""/>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <ol>
+                      {this.state.layouts.map(layout => this.listItem(layout))}
+                    </ol>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
   }  
   
   listItem(layout) {
@@ -60,7 +69,7 @@ class SelectLayout extends React.Component {
            
     try {
       layoutConfig = JSON.parse(layout.notes)
-      {console.log("layoutConfig",layoutConfig)}
+      console.log("layoutConfig",layoutConfig)
       
        if (layoutConfig.layout) {
         return  <li key={layout.id}>

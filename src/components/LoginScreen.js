@@ -3,7 +3,7 @@ import React from 'react';
 console.log("Particle is", window.Particle)
 var particle = new window.Particle();  
 
-import ClickButton from "./ClickButton"
+//import ClickButton from "./ClickButton"
 import PictureButton from "./PictureButton"
 
 class LoginScreen extends React.Component{

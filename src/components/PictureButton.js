@@ -17,7 +17,7 @@ class PictureButton extends React.Component {
 
 	render() {
   	return  <div>
-  	  <img className={this.props.class} onClick={this.click}/>
+  	  <img className={this.props.class} onClick={this.click} alt={this.props.class}/>
   	</div>
   }
 }
