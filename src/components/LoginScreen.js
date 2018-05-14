@@ -20,6 +20,8 @@ class LoginScreen extends React.Component{
    var password = document.getElementById("password").value
    var app = this.props.app
    var me = this
+   console.log("Constructor.handleLogin() username=",username)
+   console.log("Constructor.handleLogin() password=",password)
    
    this.setState({loginError: false})
     
@@ -45,22 +47,20 @@ class LoginScreen extends React.Component{
   	console.log("loginScreen::render()")
     
   	return <div className="loginScreen">
-      <table>
-        <tbody>
-          <tr>
-            <td>User:</td><td><input id="username" type="text" name="user"></input><br/></td>
-          </tr>
-          <tr>
-            <td>Password:</td><td><input id="password" type="password" name="pass"></input></td>
-          </tr>
-          <tr >
-            <td colSpan="2"><PictureButton class="loginBtn"  fn={this.handleLogin.bind(this)}/></td>
-          </tr>
-        </tbody>
-      </table>
+              <div className="loginForm">
+                <p>wiCC Model Railroad Controller</p>
+                <h1>Login</h1>
 
-      
-     {this.state.loginError ?  <p>Login Error</p> : <p/>}
+                <label htmlFor="email"><b>Email</b></label>
+                <input type="text" placeholder="Enter Email" id="username" name="email" required/>
+
+                <label htmlFor="psw"><b>Password</b></label>
+                <input type="password" placeholder="Enter Password" id="password" name="psw" required/>
+
+                <PictureButton name="Login" class="loginBtn" fn={this.handleLogin.bind(this)}/>
+                {this.state.loginError ?  <p>Login Error</p> : <p/>}
+              </div>
+
   	</div>
   }
   

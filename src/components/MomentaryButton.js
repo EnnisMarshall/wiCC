@@ -23,7 +23,7 @@ class MomentaryButton extends React.Component {
 
 	render() {
   	return  <div>
-  	  <button className={this.props.class} onMouseDown={this.start} onMouseUp={this.stop}>{this.props.name}</button>
+  	  <img className={this.props.class} onMouseDown={this.start} onMouseUp={this.stop} alt={this.props.class}/>
   	</div>
   }
 }

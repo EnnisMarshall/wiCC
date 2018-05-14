@@ -220,7 +220,7 @@ class ControlPanel extends React.Component {
                       </span>
                     </td>
                     <td>             
-                      <MomentaryButton class="" name="Horn" fn={this.triggerHorn.bind(this)}/> 
+                      <MomentaryButton class="hornBtn" fn={this.triggerHorn.bind(this)}/> 
                     </td>
                   </tr>
                 </tbody>

@@ -23,16 +23,31 @@ h1 {
   text-transform: uppercase;
 }
 
+@media only screen and (max-width: 500px){
+  h1 {
+  margin-top: 5px;
+  font-size: 30px;
+  color: rgb(141,217,252);
+  text-transform: uppercase;
+}
+  p {
+    margin-top:0px;
+    font-size: 15px;
+  }
+}
+
 button, .radio {
  margin: 10px;
  font-size: 18px;
  height: 50px;
- border-radius: 10px;
+ width: 150px;
+ border-radius: 5px;
  border: none;
- box-shadow: 1px 1px 0px 2px rgba(0,0,0,0.3);
+ //box-shadow: 1px 1px 0px 2px rgba(0,0,0,0.3);
  background: rgb(141,217,252);
   cursor: pointer;
 }
+
 
 .radio {
   padding-top: 10px;
@@ -59,26 +74,137 @@ td {
 }
 
 .loginBtn { 
+  display: flex;
   height: 25pt;
   width: 25pt;  
   content: url(https://cdn.glitch.com/c08da29c-32b5-48d3-91bd-317f5d96c9f1%2Ficons8-enter-50.png?1524783283084);
 }
 
 .logOutBtn {
+  right: 0;
   height: 25pt;
   width: 25pt;
   display: block;
-  margin: auto;
   content: url(https://cdn.glitch.com/c08da29c-32b5-48d3-91bd-317f5d96c9f1%2Ficons8-exit-filled-50.png?1525266182730);
 }
 
 .stopBtn {
-  height: 50pt;
-  width: 50pt;
+  display: flex;
+  height: 50px;
+  width: 50px;
   content: url(https://cdn.glitch.com/c08da29c-32b5-48d3-91bd-317f5d96c9f1%2Fstop-1327126_960_720.png?1524343726930);
+}
+
+.hornBtn{
+ content: url('https://cdn.glitch.com/b9c6a0c8-d2dc-4801-b9c0-50f4913e8e56%2FTrumpet_Transparent_PNG_Clipart.png?1526334433108'); 
+ display:flex;
+ height: 50px;
+ width: 150px;
+}
+
+.loginScreen{
+  background-image: url("https://cdn.glitch.com/b9c6a0c8-d2dc-4801-b9c0-50f4913e8e56%2FP1030369.jpg?1526235831869");
+
+  min-height:600pt;
+
+  background-position: top;
+  background-repeat: no-repeat;
+  background-size: 100% auto;
+  display: flex;
 }
 
 
 
 
+  
+  .loginForm {
+    position: absolute;
+    right: 0;
+    margin: 20px;
+    max-width: 300px;
+    padding: 16px;
+    background-color: white;
+}
+
+@media only screen and (max-width:500px){
+   .loginForm{
+      position: absolute;
+      right: 0;
+      margin: 10px;
+      max-width: 200px;
+      max-height: 425px;
+      padding: 16px;
+      background-color: white;
+  }
+}
+
+input[type=text], input[type=password] {
+    width: 100%;
+    padding: 15px;
+    margin: 5px 0 22px 0;
+    border: none;
+    background: #f1f1f1;
+}
+
+input[type=text]:focus, input[type=password]:focus {
+    background-color: #ddd;
+    outline: none;
+}
+
+.selectLayout{
+  background-image: url("https://cdn.glitch.com/b9c6a0c8-d2dc-4801-b9c0-50f4913e8e56%2FP1090146.jpg?1526236213904");
+  background-position: top;
+  background-repeat: no-repeat;
+  background-size: 100% auto;
+  display: flex;
+  min-height: 600pt;
+}
+
+ .layoutList {
+    position: absolute;
+    left: 0;
+    margin: 20px;
+    min-width: 250px;
+    max-width: 400px;
+    padding: 16px;
+    background-color: white;
+}
+
+ul{
+  list-style-type: none;
+  margin-left: -38pt;
+  
+}
+
+@media only screen and (max-width: 780px) {
+    .loginScreen { 
+        background-image: url('https://cdn.glitch.com/b9c6a0c8-d2dc-4801-b9c0-50f4913e8e56%2FP1090159.jpg?1526330438414'); 
+      }
+  
+    .selectLayout{
+      background-image: url('https://cdn.glitch.com/b9c6a0c8-d2dc-4801-b9c0-50f4913e8e56%2FP1090154.jpg?1526330406347');
+  }
+}
+
+@media only screen and (max-width:500px){
+   .loginForm{
+      position: absolute;
+      right: 0;
+      margin: 10px;
+      max-width: 200px;
+      max-height: 425px;
+      padding: 16px;
+      background-color: white;
+  }
+  
+  .layoutList{
+    position: absolute;
+      right: 0;
+      margin: 10px;
+      max-width: 175px;
+      max-height: 425px;
+      padding: 16px;
+      background-color: white;
+  }
+}
 

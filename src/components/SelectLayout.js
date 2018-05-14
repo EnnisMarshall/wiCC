@@ -45,22 +45,13 @@ class SelectLayout extends React.Component {
   
 	render () {
     return <div className="selectLayout">
-            <table>
-              <tbody>
-                <tr>
-                  <td>
-                    <PictureButton class="logOutBtn" fn={this.logOut.bind(this)} params=""/>
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <ol>
-                      {this.state.layouts.map(layout => this.listItem(layout))}
-                    </ol>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
+            <div className="layoutList">
+              <h1>Layouts</h1>
+              <ul>
+              {this.state.layouts.map(layout => this.listItem(layout))}
+              </ul>
+              <PictureButton class="logOutBtn" fn={this.logOut.bind(this)} params=""/>
+            </div>
           </div>
   }  
   
