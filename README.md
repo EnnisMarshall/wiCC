@@ -20,4 +20,4 @@ The horn button sounds the horn when it is held down.
 
 The toggle switches operate the headlight and functions 1 through 12. These are simply listed as F1-F12 as they are defined differently by different decoder(the recieving chip in the locomotive) manufacturers. This is something that the modeler is always required to commit to memory. 
 
-I would like you to be able to experience the project in full with streaming and the ability to contorl the trains, however, due to the nature of out internet connection I am not able to leave the  system constatnly operational. If you send me an email at ennis@steelydev.com we can schedule a time when I can get a stream running and have a railroad operaitonal for you to try actually using the program on. 
+I would like you to be able to experience the project in full with streaming and the ability to control the trains, however, due to the nature of out internet connection I am not able to leave the  system constantly operational. If you send me an email at ennis@steelydev.com we can schedule a time when I can get a stream running and have a railroad operaitonal for you to try actually using the program on. 
