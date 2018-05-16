@@ -1,3 +1,5 @@
+//firmware for Particle Photon controller
+
 byte cmd_buf[10];
 
 void setup() {
